@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="huware" schema="public" type="PostgreSQL - 14.7 (Homebrew)">
+   <tables>
+      <table name="reservations" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4">
+            <child column="res_id" foreignKey="spots_reservations_res_id_fkey" implied="false" onDeleteCascade="false" table="spots_reservations"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="spot_type" nullable="false" remarks="" size="64" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="spot_name" nullable="false" remarks="" size="64" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="status" nullable="false" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="4" name="deleted" nullable="true" remarks="" size="10" type="int4"/>
+         <column autoUpdated="false" digits="0" id="5" name="first_name" nullable="false" remarks="" size="64" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="6" name="last_name" nullable="false" remarks="" size="64" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="7" name="email" nullable="false" remarks="" size="128" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="8" name="start_date" nullable="false" remarks="" size="13" type="date"/>
+         <column autoUpdated="false" digits="0" id="9" name="end_date" nullable="false" remarks="" size="13" type="date"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="reservations_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="spots" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="name" nullable="false" remarks="" size="64" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="1" name="type" nullable="false" remarks="" size="64" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="sector" nullable="true" remarks="" size="64" type="varchar"/>
+         <column autoUpdated="false" defaultValue="now()" digits="0" id="3" name="updated_at" nullable="false" remarks="" size="13" type="date"/>
+         <primaryKey column="name" sequenceNumberInPK="1"/>
+         <primaryKey column="type" sequenceNumberInPK="2"/>
+         <primaryKey column="updated_at" sequenceNumberInPK="3"/>
+         <index name="spots_pkey" unique="true">
+            <column ascending="true" name="name"/>
+            <column ascending="true" name="type"/>
+            <column ascending="true" name="updated_at"/>
+         </index>
+      </table>
+      <table name="spots_reservations" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" digits="0" id="0" name="res_id" nullable="false" remarks="" size="10" type="int4">
+            <parent column="id" foreignKey="spots_reservations_res_id_fkey" implied="false" onDeleteCascade="false" table="reservations"/>
+         </column>
+         <column autoUpdated="false" digits="0" id="1" name="spots_name" nullable="false" remarks="" size="64" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="2" name="spots_type" nullable="false" remarks="" size="64" type="varchar"/>
+         <column autoUpdated="false" digits="0" id="3" name="spots_updated_at" nullable="false" remarks="" size="13" type="date"/>
+         <primaryKey column="res_id" sequenceNumberInPK="1"/>
+         <primaryKey column="spots_name" sequenceNumberInPK="2"/>
+         <primaryKey column="spots_type" sequenceNumberInPK="3"/>
+         <primaryKey column="spots_updated_at" sequenceNumberInPK="4"/>
+         <index name="res_spots_pkey" unique="true">
+            <column ascending="true" name="res_id"/>
+            <column ascending="true" name="spots_name"/>
+            <column ascending="true" name="spots_type"/>
+            <column ascending="true" name="spots_updated_at"/>
+         </index>
+      </table>
+   </tables>
+</database>
