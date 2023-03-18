@@ -1,1 +1,1 @@
-# maso-ware
+# maso-ware - un nome, una certezza
